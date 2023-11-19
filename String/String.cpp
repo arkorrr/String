@@ -1,4 +1,5 @@
-﻿#include <iostream>
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
 #include <string>
 #include<cstring>
 #include <stdio.h>
@@ -27,10 +28,10 @@ int StringToNumber(char* str)
     return res;
 }
 
-string NumberToString(int number,string* str)
+char* NumberToString(int number, char* str)
 {
-    *str = to_string(number);
-    return *str;
+    sprintf(str, "%d", number);
+    return str;
 }
 
 char* UpperCase(char* str1)
@@ -51,42 +52,47 @@ char* LowerCase(char* str1)
     return str1;
 }
 
-string mystrrev(string reversedStr) 
+void mystrrev(char* str)
 {
-   reverse(reversedStr.begin(), reversedStr.end());
-   return reversedStr;
+    int len = strlen(str);
+    for (int i = 0; i < len / 2; i++)
+    {
+        swap(str[i], str[len - i - 1]);
+    }
 }
 
 int main()
 {
+    //При проверке нужно запускать каждое задание отдельно.
     setlocale(LC_ALL, "rus");
-        /*int mystrcmp(const char* str1, const char* str2); —
-            функция сравнивает две строки, и, если строки равны
-            возвращает 0, если первая строка больше второй, то
-            возвращает 1, иначе –1*/
-    char str1[20] = {"Привет как дела"};
-    char str2[20] = {"Привет как дела"};
-    cout << mystrcmp(str1, str2) << endl;
+    /*int mystrcmp(const char* str1, const char* str2); —
+        функция сравнивает две строки, и, если строки равны
+        возвращает 0, если первая строка больше второй, то
+        возвращает 1, иначе –1*/
+    char str1[30] = {"Привет как дела"};
+    char str2[30] = {"Привет как дела"};
+    cout << "Task1: " << mystrcmp(str1, str2) << endl;
 
     /*int StringToNumber(char* str); — функция конвертирует строку в число и возвращает это число*/
     char str[] = { "7" };
-    cout << StringToNumber(str) << endl;
+    cout << "Task2: " << StringToNumber(str) << endl;
 
     /*char* NumberToString(int number); — функция конвертирует число в строку и возвращает указатель на эту строку.*/
     int number = 7;
-    string NumToStr;
-    cout << NumberToString(number, &NumToStr) << endl;
-
+    char NumToStr[5];
+    cout << "NumberToString: " << NumberToString(number, NumToStr) << endl;
+ 
     /*char* Uppercase(char* str1); — функция преобразует строку в верхний регистр.*/
     char strr[] = { "Test String" };
-    cout << UpperCase(strr) << endl;
+    cout << "Task4: " << UpperCase(strr) << endl;
 
     /*char* Lowercase(char* str1); — функция преобразует строку в нижний регистр.*/
-    char STR[] = { "Test String" };
-    cout << LowerCase(STR) << endl;
+    char str[] = { "test string" };
+    cout << "task5: " << LowerCase(str) << endl;
 
     /*char* mystrrev(char* str); — функция реверсирует строку и возвращает указатель на новую строку.*/
-    string oldStr = { "Hello, World!" };
-    cout << mystrrev(oldStr) << endl;
+    char oldStr[] = {"Hello, World!"};
+    mystrrev(oldStr);   
+    cout << oldStr << endl;
 
 }
